@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ASCOM.Alpaca.Components" Version="1.0.52" />
+    <PackageReference Include="ASCOM.Alpaca.Device" Version="1.0.52" />
+    <PackageReference Include="ASCOM.Com.Components" Version="1.0.52" />
+    <PackageReference Include="ASCOM.Common.Components" Version="1.0.52" />
+    <PackageReference Include="ASCOM.Tools" Version="1.0.52" />
+  </ItemGroup>
+
+</Project>
