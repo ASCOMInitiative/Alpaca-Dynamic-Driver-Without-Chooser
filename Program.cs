@@ -30,7 +30,9 @@ namespace DynamicDriver
 			Console.WriteLine($"{rots.Count} Rotator(s) here, using #0");
 			AscomDevice rot = rots[0];
 			string rotName = $"{rot.Manufacturer} Alpaca Rotator";
-			// Note that the ASCOMDevice also has useful AlpacaDevice properties
+			// Note that the ASCOMDevice class includes Alpaca Information such as IP
+			// address and port so that all information about the ASCOM device is
+			// available in one data structure.
 			Console.WriteLine($"Creating ASCOM Dynamic Driver for {rotName} on {rot.IpAddress}:{rot.IpPort}");
 			string uid = Guid.NewGuid().ToString();
 			Console.WriteLine($"Assigning Alpaca unique ID of {uid}");
