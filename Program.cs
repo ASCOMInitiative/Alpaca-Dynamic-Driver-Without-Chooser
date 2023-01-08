@@ -12,27 +12,28 @@ namespace DynamicDriver
 	{
 		static async Task Main(string[] args)
 		{
-			List<AlpacaDevice> svrs = await AlpacaDiscovery.GetAlpacaDevicesAsync();
-			if (svrs.Count == 0)
+			List<AlpacaDevice> devs = await AlpacaDiscovery.GetAlpacaDevicesAsync();
+			if (devs.Count == 0)
 			{
-				Console.WriteLine("Nothing found, start up the Omni Server.");
+				Console.WriteLine("Nothing found, start up the Omni Simulator.");
 				return;
 			}
-			Console.WriteLine($"{svrs.Count} Alpaca servers found. Using the first.");
-			AlpacaDevice svr = svrs[0];
-			Console.WriteLine($"{ svr.ServerName} at {svr.IpAddress}:{svr.Port}");
-			List<AscomDevice> rots = svr.AscomDevices(DeviceTypes.Rotator);
+			Console.WriteLine($"{devs.Count} Alpaca devices found. Using the first.");
+			AlpacaDevice dev = devs[0];
+			Console.WriteLine($"{ dev.ServerName} at {dev.IpAddress}:{dev.Port}");
+			List<AscomDevice> rots = dev.AscomDevices(DeviceTypes.Rotator);
 			if (rots.Count == 0)
 			{
-				Console.WriteLine($"No Rotators served by {svr.ServerName}.");
+				Console.WriteLine($"No Rotators here at {dev.ServerName}.");
 				return;
 			}
-			Console.WriteLine($"{rots.Count} Rotators served here, using #0");
+			Console.WriteLine($"{rots.Count} Rotator(s) here, using #0");
 			AscomDevice rot = rots[0];
 			string rotName = $"{rot.Manufacturer} Alpaca Rotator";
-			// Note that the ASCOM Device also has useful server properties
+			// Note that the ASCOMDevice also has useful AlpacaDevice properties
 			Console.WriteLine($"Creating ASCOM Dynamic Driver for {rotName} on {rot.IpAddress}:{rot.IpPort}");
 			string uid = Guid.NewGuid().ToString();
+			Console.WriteLine($"Assigning Alpaca unique ID of {uid}");
 			string result = PlatformUtilities.CreateDynamicDriver(
 				DeviceTypes.Rotator,
 				0,
